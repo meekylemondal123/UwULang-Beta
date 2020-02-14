@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="uwulangcss.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Galada-Regular">
+
+        <title>OwO-ifier!</title>
+        <script>
+
+            
+            // TO-DO list
+            // Figure out proper phonetic rules, talk to Jawad about this later. 
+            // Add sounds 
+            // Add images here and there 
+            // Add animations (later on down the road)
+
+            function locate(letter, index, phraseToReplace){
+                let newLetter = "";
+                let changes = false;
+
+                if (letter.toLowerCase() === "r" ||  letter.toLowerCase() === "m" || letter.toLowerCase() === "l"){
+                    if (letter == letter.toUpperCase()){
+                        newLetter = "W";
+                        changes = true;
+                    } else {
+                        newLetter = "w";
+                        changes = true;
+                    }
+                } else if (letter == "."){
+                    let value = Math.ceil(Math.random() * 2);
+
+                    if (value == 1){
+                        newLetter = " owo.";
+                        changes = true;
+                    } else {
+                        newLetter = " uwu.";
+                        changes = true;
+                    }
+                } else if (letter == "v"){
+                    if (index == 0){
+                        newLetter = "W";
+                        changes = true;
+                    } else {
+                        if(phraseToReplace[index - 1] == " "){
+                            newLetter = "w";
+                            changes = true;
+                        }
+                    }
+                } else if (index < phraseToReplace.length - 1 && changes == false){
+                    if (letter == "e"){
+                        if (phraseToReplace[index + 1] == "a"){
+                            newLetter = "ee";
+                            changes = True;
+                        } else if (letter == "s"){
+                            if (phraseToReplace[index + 1] == "e"){
+                                newLetter = "z";
+                                changes = true;
+                            }
+                        }
+                    }
+                }
+                
+                // This part of the code will decide whether or not to return the newly changed letter or the same letter
+                if (changes){
+                    return newLetter;
+                } else {
+                    return letter;
+                }
+            }
+
+            function gettingString(){
+                var originalString = document.getElementById("getFrom").value;
+                var newString = "";
+
+                for (let i = 0; i < originalString.length; i++){
+                    newString += locate(originalString[i], i, originalString);
+                }
+
+                document.getElementById("getFrom").value = newString;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>The Official OwO-ifier</h1>
+        <textarea id="getFrom" row="5" cols="50">
+        Please enter your text here!
+        </textarea>
+
+        <button type="button" onclick="gettingString()">OwO-ify!</button>
+        
+    </body>
+</html>
